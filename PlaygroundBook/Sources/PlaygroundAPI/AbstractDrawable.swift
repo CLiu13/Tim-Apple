@@ -112,7 +112,7 @@ public class AbstractDrawable: Equatable {
     
     // MARK: Internal
     
-    internal let backingView: UIView
+    public let backingView: UIView
     
     internal var touchGestureRecognizer: TouchGestureRecognizer
     

@@ -1,7 +1,9 @@
 //#-hidden-code
-_setup()
 //#-end-hidden-code
-//#-editable-code Tap to enter code
+//#-editable-code
+import UIKit
+import PlaygroundSupport
+
 var blocks: [Rectangle] = []
 var floors: [Rectangle] = []
 
@@ -63,4 +65,21 @@ for floor in floors {
         floor.dropShadow = nil
     }
 }
+
+let viewController = UIViewController()
+viewController.view = Canvas.shared.backingView
+
+let animator = UIDynamicAnimator(referenceView: viewController.view)
+
+viewController.view.addSubview(apple.backingViewAsImageView)
+
+let gravity = UIGravityBehavior(items: [apple.backingViewAsImageView])
+animator.addBehavior(gravity)
+
+let collision = UICollisionBehavior(items: [apple.backingViewAsImageView, tim.backingViewAsImageView])
+collision.collisionMode = .everything
+collision.translatesReferenceBoundsIntoBoundary = true
+animator.addBehavior(collision)
+
+PlaygroundPage.current.liveView = viewController
 //#-end-editable-code

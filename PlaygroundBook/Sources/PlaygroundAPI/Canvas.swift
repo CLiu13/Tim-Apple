@@ -66,7 +66,7 @@ public class Canvas {
     
     fileprivate var touchGestureRecognizer: TouchGestureRecognizer
     
-    internal let backingView: UIView = FrameChangeNotifyingView()
+    public let backingView: UIView = FrameChangeNotifyingView()
     
     private init() {
         
