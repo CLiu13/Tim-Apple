@@ -204,7 +204,7 @@ extension AbstractDrawable: TouchGestureRecognizerDelegate {
             
             animate {
                 self.scale = 1.15
-                self.rotation = self.rotation + (.pi / 4)
+                //self.rotation = self.rotation + (.pi / 4)
             }
         }
         
@@ -260,7 +260,7 @@ extension AbstractDrawable: TouchGestureRecognizerDelegate {
         // Reset the scale and rotation when touch is lifted
         animate {
             self.scale = 1.0
-            self.rotation = self.rotation - (.pi / 4)
+            //self.rotation = self.rotation - (.pi / 4)
         }
     }
 }

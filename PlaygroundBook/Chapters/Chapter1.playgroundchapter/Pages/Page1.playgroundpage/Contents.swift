@@ -1,42 +1,44 @@
 //#-hidden-code
-//
-//  See LICENSE folder for this template’s licensing information.
-//
-//  Abstract:
-//  The Swift file containing the source code edited by the user of this playground book.
-//
-//#-end-hidden-code
-let str = "Hello, playground"
-
-//#-code-completion(module, hide, Swift)
-//#-code-completion(identifier, hide, _setup())
-//#-code-completion(identifier, hide, AbstractDrawable)
-//#-code-completion(identifier, hide, _ColorLiteralType)
-//#-hidden-code
 _setup()
 //#-end-hidden-code
 //#-editable-code Tap to enter code
-// create a circle and make it draggable.
-let circle = Circle(radius: 7.0)
-circle.color = Color.purple
-circle.draggable = true
+var blocks: [Rectangle] = []
 
-// when the circle is touched, make it darker and give it a shadow.
-circle.onTouchDown {
-    circle.color = circle.color.darker()
-    circle.dropShadow = Shadow()
+for i in 1...5 {
+    blocks.append(Rectangle(width: 2, height: Double(20 + i * 2), cornerRadius: 0.5))
 }
 
-// when the touch ends on the circle, change its color to a random color.
-circle.onTouchUp {
-    circle.color = Color.random()
-    circle.dropShadow = nil
+let xPoints: [Double] = [-6, -3, 0, 3, 6]
+
+func getNearestXPoint(currentX: Double) -> Double {
+    var diff: Double = 100
+    var nearestX: Double = 0
+
+    for x in xPoints {
+        if abs(x - currentX) < diff {
+            diff = abs(x - currentX)
+            nearestX = x
+        }
+    }
+
+    return nearestX
 }
 
-// jump the circle to the point on the canvas that was touched.
-Canvas.shared.onTouchUp {
-    circle.center = Canvas.shared.currentTouchPoints.first!
-    circle.dropShadow = Shadow()
-}
+for block in blocks {
+    block.center = Point(x: Double(-6 + blocks.firstIndex(of: block)! * 3), y: Double(-30 + block.size.height / 2))
 
+    block.draggable = true
+
+    block.onTouchDown {
+        block.dropShadow = Shadow()
+    }
+
+    block.onTouchUp {
+        block.dropShadow = nil
+
+        animate {
+            block.center = Point(x: getNearestXPoint(currentX: block.center.x), y: Double(-30 + block.size.height / 2))
+        }
+    }
+}
 //#-end-editable-code

@@ -114,6 +114,8 @@
 		5EF2F9AD2054BBF300191409 /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		5EF2F9B62054E6F900191409 /* Chapters */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Chapters; sourceTree = "<group>"; };
 		CB58E3D4224203960058DBB7 /* PublicResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PublicResources; sourceTree = "<group>"; };
+		CB58E3D822427CCB0058DBB7 /* PlaygroundAPI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PlaygroundAPI; sourceTree = "<group>"; };
+		CB58E3DD2242AF750058DBB7 /* PlaygroundInternal */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PlaygroundInternal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +256,8 @@
 		5EF2F9A22054BB3E00191409 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				CB58E3DD2242AF750058DBB7 /* PlaygroundInternal */,
+				CB58E3D822427CCB0058DBB7 /* PlaygroundAPI */,
 				5EF2F9AD2054BBF300191409 /* LiveViewController.swift */,
 				5E3196F22061DEA40077BBD7 /* LiveViewSupport.swift */,
 			);
