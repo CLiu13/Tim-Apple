@@ -3,10 +3,20 @@ _setup()
 //#-end-hidden-code
 //#-editable-code Tap to enter code
 var blocks: [Rectangle] = []
+var floors: [Rectangle] = []
 
 for i in 1...5 {
     blocks.append(Rectangle(width: 2, height: Double(20 + i * 2), cornerRadius: 0.5))
 }
+
+floors.append(Rectangle(width: 20, height: 22, cornerRadius: 2))
+floors.append(Rectangle(width: 20, height: 30, cornerRadius: 2))
+
+let tim = Image(name: "tim")
+let apple = Image(name: "apple-normal")
+
+tim.draggable = true
+apple.draggable = true
 
 let xPoints: [Double] = [-6, -3, 0, 3, 6]
 
@@ -39,6 +49,18 @@ for block in blocks {
         animate {
             block.center = Point(x: getNearestXPoint(currentX: block.center.x), y: Double(-30 + block.size.height / 2))
         }
+    }
+}
+
+for floor in floors {
+    floor.draggable = true
+
+    floor.onTouchDown {
+        floor.dropShadow = Shadow()
+    }
+
+    floor.onTouchUp {
+        floor.dropShadow = nil
     }
 }
 //#-end-editable-code
