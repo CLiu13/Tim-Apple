@@ -36,8 +36,8 @@ func createPlatforms(blocks: [Rectangle], minX: Double, maxX: Double, minY: Doub
     var platform1 = Rectangle(width: width, height: shortHeight, cornerRadius: 1)
     var platform2 = Rectangle(width: width, height: tallHeight, cornerRadius: 1)
 
-    platform1.center = Point(x: minX + 1 + width / 2, y: blocks[0].center.y)
-    platform2.center = Point(x: maxX - 1 - width / 2, y: blocks.last!.center.y)
+//    platform1.center = Point(x: minX + 1 + width / 2, y: blocks[0].center.y)
+//    platform2.center = Point(x: maxX - 1 - width / 2, y: blocks.last!.center.y)
 
     platform1.color = .gray
     platform2.color = .gray
@@ -99,17 +99,21 @@ snapBlocks(blocks: blocks, xBounds: xBounds, startY: -27.5) // TODO: Need to rep
 let tim = Image(name: "tim")
 let apple = Image(name: "apple-normal")
 
+tim.size = Size(width: 10, height: 10)
+apple.size = Size(width: 5, height: 5)
+
 // **** //
 
 let viewController = UIViewController()
 viewController.view = Canvas.shared.backingView
 
 let animator = UIDynamicAnimator(referenceView: viewController.view)
+animator.setValue(true, forKey: "debugEnabled")
 
-let gravity = UIGravityBehavior(items: [apple.backingView])
+let gravity = UIGravityBehavior(items: [apple.backingView, platforms[0].backingView])
 animator.addBehavior(gravity)
 
-let collision = UICollisionBehavior(items: [apple.backingView])
+let collision = UICollisionBehavior(items: [platforms[0].backingView, apple.backingView])
 collision.translatesReferenceBoundsIntoBoundary = true
 animator.addBehavior(collision)
 
@@ -120,7 +124,7 @@ pushAppleButton.center.y = 10
 
 pushAppleButton.onTouchUp {
     let push = UIPushBehavior(items: [apple.backingView], mode: .instantaneous)
-    push.pushDirection = CGVector(dx: -10, dy: 0)
+    push.pushDirection = CGVector(dx: -3, dy: 0)
     animator.addBehavior(push)
 
     // Button can only be used once
