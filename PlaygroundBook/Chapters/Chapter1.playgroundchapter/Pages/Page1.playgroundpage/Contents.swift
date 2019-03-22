@@ -36,8 +36,8 @@ func createPlatforms(blocks: [Rectangle], minX: Double, maxX: Double, minY: Doub
     var platform1 = Rectangle(width: width, height: shortHeight, cornerRadius: 1)
     var platform2 = Rectangle(width: width, height: tallHeight, cornerRadius: 1)
 
-//    platform1.center = Point(x: minX + 1 + width / 2, y: blocks[0].center.y)
-//    platform2.center = Point(x: maxX - 1 - width / 2, y: blocks.last!.center.y)
+    platform1.center = Point(x: minX + 1 + width / 2, y: blocks[0].center.y)
+    platform2.center = Point(x: maxX - 1 - width / 2, y: blocks.last!.center.y)
 
     platform1.color = .gray
     platform2.color = .gray
@@ -102,6 +102,8 @@ let apple = Image(name: "apple-normal")
 tim.size = Size(width: 10, height: 10)
 apple.size = Size(width: 5, height: 5)
 
+apple.center = Point(x: platforms[0].center.x, y: platforms[0].center.y + 20)
+
 // **** //
 
 let viewController = UIViewController()
@@ -110,13 +112,6 @@ viewController.view = Canvas.shared.backingView
 let animator = UIDynamicAnimator(referenceView: viewController.view)
 animator.setValue(true, forKey: "debugEnabled")
 
-let gravity = UIGravityBehavior(items: [apple.backingView, platforms[0].backingView])
-animator.addBehavior(gravity)
-
-let collision = UICollisionBehavior(items: [platforms[0].backingView, apple.backingView])
-collision.translatesReferenceBoundsIntoBoundary = true
-animator.addBehavior(collision)
-
 // Create text button that, when tapped, will slightly push the apple to the left
 let pushAppleButton = Text(string: "Push Apple!", fontSize: 21.0)
 pushAppleButton.color = .blue
@@ -124,8 +119,15 @@ pushAppleButton.center.y = 10
 
 pushAppleButton.onTouchUp {
     let push = UIPushBehavior(items: [apple.backingView], mode: .instantaneous)
-    push.pushDirection = CGVector(dx: -3, dy: 0)
+    push.pushDirection = CGVector(dx: 0.5, dy: 0)
     animator.addBehavior(push)
+
+    let gravity = UIGravityBehavior(items: [apple.backingView])
+    animator.addBehavior(gravity)
+
+    let collision = UICollisionBehavior(items: [platforms[0].backingView, apple.backingView, blocks[0].backingView, blocks[1].backingView, blocks[2].backingView, blocks[3].backingView, blocks[4].backingView, platforms[1].backingView])
+    collision.translatesReferenceBoundsIntoBoundary = true
+    animator.addBehavior(collision)
 
     // Button can only be used once
     pushAppleButton.backingView.removeFromSuperview()
