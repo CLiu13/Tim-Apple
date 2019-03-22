@@ -25,7 +25,7 @@ private let DefaultImageContentMode = ImageContentMode.scaleToFitMaintainingAspe
 /// - localizationKey: Image
 public class Image: AbstractDrawable {
 
-    public var backingViewAsImageView: UIImageView {
+    private var backingViewAsImageView: UIImageView {
         return backingView as! UIImageView
     }
     

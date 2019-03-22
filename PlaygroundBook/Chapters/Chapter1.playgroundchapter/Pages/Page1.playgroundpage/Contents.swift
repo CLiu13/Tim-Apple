@@ -4,82 +4,128 @@
 import UIKit
 import PlaygroundSupport
 
-var blocks: [Rectangle] = []
-var floors: [Rectangle] = []
+// Based on the liveView grid dimensions, create a certain number of blocks
+func createBlocks(num: Int, minX: Double, maxX: Double, minY: Double, maxY: Double) -> [Rectangle] {
+    var blocks: [Rectangle] = []
+    var block: Rectangle
 
-for i in 1...5 {
-    blocks.append(Rectangle(width: 2, height: Double(20 + i * 2), cornerRadius: 0.5))
+    let width = (0.5 * (maxX - minX) + 0.1 - Double(num) * 0.1) / Double(num)
+    let height = 0.75 * (maxY - minY) / (Double(num) * 0.1 + 1)
+
+    let startX = 0 - Double(num - 1) * (width + 0.1) / 2
+    let startY = minY - height / 4
+
+    for i in 0...num - 1 {
+        block = Rectangle(width: width, height: height - Double(i) * height / 10, cornerRadius: 0.5)
+        block.center = Point(x: startX + Double(i) * (width + 0.1), y: startY + block.size.height / 2)
+
+        block.draggable = true
+
+        blocks.append(block)
+    }
+
+    return blocks
 }
 
-floors.append(Rectangle(width: 20, height: 22, cornerRadius: 2))
-floors.append(Rectangle(width: 20, height: 30, cornerRadius: 2))
+// Based on the liveView grid dimensions and set of blocks, create two platforms
+func createPlatforms(blocks: [Rectangle], minX: Double, maxX: Double, minY: Double, maxY: Double) -> [Rectangle] {
+    let width = (0.5 * (maxX - minX) - 2.2) / 2
+    let shortHeight = blocks[0].size.height
+    let tallHeight = blocks.last!.size.height
+
+    var platform1 = Rectangle(width: width, height: shortHeight, cornerRadius: 1)
+    var platform2 = Rectangle(width: width, height: tallHeight, cornerRadius: 1)
+
+    platform1.center = Point(x: minX + 1 + width / 2, y: blocks[0].center.y)
+    platform2.center = Point(x: maxX - 1 - width / 2, y: blocks.last!.center.y)
+
+    platform1.color = .gray
+    platform2.color = .gray
+
+    return [platform1, platform2]
+}
+
+// Based on a set of blocks, create x-bounds for the blocks to snap into
+func createXBounds(blocks: [Rectangle]) -> [Double] {
+    var xBounds: [Double] = []
+
+    for block in blocks {
+        xBounds.append(block.center.x)
+    }
+
+    return xBounds
+}
+
+// Based on a set of x-bounds, get the closest one relative to a current x
+func getNearestXBound(xBounds: [Double], currentX: Double) -> Double {
+    var diff: Double = Double(Int.max)
+    var nearestXBound: Double = 0
+
+    for x in xBounds {
+        if abs(x - currentX) < diff {
+            diff = abs(x - currentX)
+            nearestXBound = x
+        }
+    }
+
+    return nearestXBound
+}
+
+// Given a set of blocks, have them snap into position after dragged
+func snapBlocks(blocks: [Rectangle], xBounds: [Double], startY: Double) {
+    for block in blocks {
+        block.onTouchDown {
+            block.dropShadow = Shadow()
+        }
+
+        block.onTouchUp {
+            block.dropShadow = nil
+
+            animate {
+                block.center = Point(x: getNearestXBound(xBounds: xBounds, currentX: block.center.x), y: startY + block.size.height / 2)
+            }
+        }
+    }
+}
+
+var blocks = createBlocks(num: 5, minX: -30, maxX: 30, minY: -20, maxY: 40)
+var platforms = createPlatforms(blocks: blocks, minX: -30, maxX: 30, minY: -20, maxY: 40)
+
+let xBounds = createXBounds(blocks: blocks)
+snapBlocks(blocks: blocks, xBounds: xBounds, startY: -27.5) // TODO: Need to replace hard-coded value with calculations
+
+// **** //
 
 let tim = Image(name: "tim")
 let apple = Image(name: "apple-normal")
 
-tim.draggable = true
-apple.draggable = true
-
-let xPoints: [Double] = [-6, -3, 0, 3, 6]
-
-func getNearestXPoint(currentX: Double) -> Double {
-    var diff: Double = 100
-    var nearestX: Double = 0
-
-    for x in xPoints {
-        if abs(x - currentX) < diff {
-            diff = abs(x - currentX)
-            nearestX = x
-        }
-    }
-
-    return nearestX
-}
-
-for block in blocks {
-    block.center = Point(x: Double(-6 + blocks.firstIndex(of: block)! * 3), y: Double(-30 + block.size.height / 2))
-
-    block.draggable = true
-
-    block.onTouchDown {
-        block.dropShadow = Shadow()
-    }
-
-    block.onTouchUp {
-        block.dropShadow = nil
-
-        animate {
-            block.center = Point(x: getNearestXPoint(currentX: block.center.x), y: Double(-30 + block.size.height / 2))
-        }
-    }
-}
-
-for floor in floors {
-    floor.draggable = true
-
-    floor.onTouchDown {
-        floor.dropShadow = Shadow()
-    }
-
-    floor.onTouchUp {
-        floor.dropShadow = nil
-    }
-}
+// **** //
 
 let viewController = UIViewController()
 viewController.view = Canvas.shared.backingView
 
 let animator = UIDynamicAnimator(referenceView: viewController.view)
 
-viewController.view.addSubview(apple.backingViewAsImageView)
-
-let gravity = UIGravityBehavior(items: [apple.backingViewAsImageView])
+let gravity = UIGravityBehavior(items: [apple.backingView])
 animator.addBehavior(gravity)
 
-let collision = UICollisionBehavior(items: [apple.backingViewAsImageView, tim.backingViewAsImageView])
-collision.collisionMode = .everything
+let collision = UICollisionBehavior(items: [apple.backingView])
 collision.translatesReferenceBoundsIntoBoundary = true
 animator.addBehavior(collision)
+
+// Create text button that, when tapped, will slightly push the apple to the left
+let pushAppleButton = Text(string: "Push Apple!", fontSize: 21.0)
+pushAppleButton.color = .blue
+pushAppleButton.center.y = 10
+
+pushAppleButton.onTouchUp {
+    let push = UIPushBehavior(items: [apple.backingView], mode: .instantaneous)
+    push.pushDirection = CGVector(dx: -10, dy: 0)
+    animator.addBehavior(push)
+
+    // Button can only be used once
+    pushAppleButton.backingView.removeFromSuperview()
+}
 
 PlaygroundPage.current.liveView = viewController
 //#-end-editable-code
