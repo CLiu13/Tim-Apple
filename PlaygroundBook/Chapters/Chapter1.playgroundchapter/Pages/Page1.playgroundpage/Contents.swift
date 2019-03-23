@@ -137,10 +137,20 @@ apple.size = Size(width: 5, height: 5)
 tim.center = Point(x: platforms.last!.center.x, y: platforms.last!.center.y + platforms.last!.size.height / 2 + tim.size.height / 2 + 1)
 apple.center = Point(x: platforms[0].center.x, y: platforms[0].center.y + platforms[0].size.height / 2 + apple.size.height / 2 + 1)
 
+// Assigning unique identifiers to characters
+tim.backingView.tag = 1000 // TODO: Tag needs to be self-explanatory
+apple.backingView.tag = 2000 // TODO: Tag needs to be self-explanatory
+
+// Create rectangle that serves as an artificial ground
+let fakeGround = Rectangle(width: 60, height: 8, cornerRadius: 0) // TODO: Need to replace hard-coded value with calculations
+fakeGround.center = Point(x: 0, y: -31) // TODO: Need to replace hard-coded value with calculations
+fakeGround.color = .white
+
 blocks = shuffleBlocks(blocks: blocks, xBounds: xBounds)
 
 let viewController = UIViewController()
 viewController.view = Canvas.shared.backingView
+viewController.view.backgroundColor = .white
 
 let animator = UIDynamicAnimator(referenceView: viewController.view)
 animator.setValue(true, forKey: "debugEnabled")
@@ -158,15 +168,22 @@ pushAppleButton.onTouchUp {
 
     // Push the apple
     let push = UIPushBehavior(items: [apple.backingView], mode: .instantaneous)
-    push.pushDirection = CGVector(dx: 0.5, dy: 0)
+    push.pushDirection = CGVector(dx: 0.75, dy: 0)
     animator.addBehavior(push)
 
     let gravity = UIGravityBehavior(items: [apple.backingView])
     animator.addBehavior(gravity)
 
-    let collision = UICollisionBehavior(items: [platforms[0].backingView, apple.backingView, blocks[0].backingView, blocks[1].backingView, blocks[2].backingView, blocks[3].backingView, blocks[4].backingView, platforms[1].backingView])
+    let collision = UICollisionBehavior(items: [platforms[0].backingView, apple.backingView, blocks[0].backingView, blocks[1].backingView, blocks[2].backingView, blocks[3].backingView, blocks[4].backingView, platforms[1].backingView, tim.backingView, fakeGround.backingView])
     collision.translatesReferenceBoundsIntoBoundary = true
     animator.addBehavior(collision)
+
+    // If apple collides with Tim...
+    collision.action = {
+        if apple.backingView.frame.intersects(tim.backingView.frame) {
+            viewController.view.backgroundColor = .green
+        }
+    }
 
     // Button can only be used once
     pushAppleButton.backingView.removeFromSuperview()
