@@ -4,7 +4,7 @@
 import UIKit
 import PlaygroundSupport
 
-// Based on the liveView grid dimensions, create a certain number of blocks
+// Given the liveView grid dimensions, create a certain number of blocks
 func createBlocks(num: Int, minX: Double, maxX: Double, minY: Double, maxY: Double) -> [Rectangle] {
     var blocks: [Rectangle] = []
     var block: Rectangle
@@ -27,7 +27,7 @@ func createBlocks(num: Int, minX: Double, maxX: Double, minY: Double, maxY: Doub
     return blocks
 }
 
-// Based on the liveView grid dimensions and set of blocks, create two platforms
+// Given the liveView grid dimensions and set of blocks, create two platforms
 func createPlatforms(blocks: [Rectangle], minX: Double, maxX: Double, minY: Double, maxY: Double) -> [Rectangle] {
     let width = (0.5 * (maxX - minX) - 2.2) / 2
     let shortHeight = blocks[0].size.height
@@ -45,7 +45,7 @@ func createPlatforms(blocks: [Rectangle], minX: Double, maxX: Double, minY: Doub
     return [platform1, platform2]
 }
 
-// Based on a set of blocks, create x-bounds for the blocks to snap into
+// Given a set of blocks, create x-bounds for the blocks to snap into
 func createXBounds(blocks: [Rectangle]) -> [Double] {
     var xBounds: [Double] = []
 
@@ -56,7 +56,7 @@ func createXBounds(blocks: [Rectangle]) -> [Double] {
     return xBounds
 }
 
-// Based on a set of x-bounds, get the closest one relative to a current x
+// Given a set of x-bounds, get the closest one relative to a current x
 func getNearestXBound(xBounds: [Double], currentX: Double) -> Double {
     var diff: Double = Double(Int.max)
     var nearestXBound: Double = 0
@@ -88,23 +88,34 @@ func snapBlocks(blocks: [Rectangle], xBounds: [Double], startY: Double) {
     }
 }
 
+// Given a set of blocks and x-bounds, shuffle the positions of blocks
+func shuffleBlocks(blocks: [Rectangle], xBounds: [Double]) -> [Rectangle] {
+    var shuffledXBounds = xBounds.shuffled()
+
+    for i in 0...blocks.count - 1 {
+        blocks[i].center.x = shuffledXBounds[i]
+    }
+
+    return blocks
+}
+
 var blocks = createBlocks(num: 5, minX: -30, maxX: 30, minY: -20, maxY: 40)
 var platforms = createPlatforms(blocks: blocks, minX: -30, maxX: 30, minY: -20, maxY: 40)
 
-let xBounds = createXBounds(blocks: blocks)
+var xBounds = createXBounds(blocks: blocks)
 snapBlocks(blocks: blocks, xBounds: xBounds, startY: -27.5) // TODO: Need to replace hard-coded value with calculations
 
-// **** //
-
+// Create the characters
 let tim = Image(name: "tim")
 let apple = Image(name: "apple-normal")
 
 tim.size = Size(width: 10, height: 10)
 apple.size = Size(width: 5, height: 5)
 
-apple.center = Point(x: platforms[0].center.x, y: platforms[0].center.y + 20)
+tim.center = Point(x: platforms.last!.center.x, y: platforms.last!.center.y + platforms.last!.size.height / 2 + tim.size.height / 2 + 1)
+apple.center = Point(x: platforms[0].center.x, y: platforms[0].center.y + platforms[0].size.height / 2 + apple.size.height / 2 + 1)
 
-// **** //
+blocks = shuffleBlocks(blocks: blocks, xBounds: xBounds)
 
 let viewController = UIViewController()
 viewController.view = Canvas.shared.backingView
