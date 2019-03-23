@@ -17,9 +17,6 @@ Contains English localizations of values in Manifest.plist files in the playgrou
 /* The localized name of the second page in the first chapter in the playground book. */
 "ChapterOnePageTwoName" = "Drag & Drop: Level 2";
 
-/* The localized name of the third page in the first chapter in the playground book. */
-"ChapterOnePageThreeName" = "Drag & Drop: Level 3";
-
 /* The localized name of the second chapter in the playground book. */
 "ChapterTwoName" = "Sorting Algorithms";
 
@@ -29,17 +26,8 @@ Contains English localizations of values in Manifest.plist files in the playgrou
 /* The localized name of the second page in the second chapter in the playground book. */
 "ChapterTwoPageTwoName" = "Sorting Algorithms: Insertion Sort";
 
-/* The localized name of the third page in the second chapter in the playground book. */
-"ChapterTwoPageThreeName" = "Sorting Algorithms: Merge Sort";
-
 /* The localized name of the third chapter in the playground book. */
 "ChapterThreeName" = "Bonus Material";
 
 /* The localized name of the first page in the third chapter in the playground book. */
 "ChapterThreePageOneName" = "Bonus Material: Review Quiz";
-
-/* The localized name of the second page in the third chapter in the playground book. */
-"ChapterThreePageTwoName" = "Bonus Material: Binary Search";
-
-/* The localized name of the third page in the third chapter in the playground book. */
-"ChapterThreePageThreeName" = "Bonus Material: Sandbox Mode";

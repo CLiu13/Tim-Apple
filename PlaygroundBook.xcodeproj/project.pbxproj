@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		5E086DCA2051DDAE004D8D25 /* LiveView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E086DCC2051DDAE004D8D25 /* LiveView.storyboard */; };
 		5E086DD32051E3A3004D8D25 /* Manifest.plist in Copy Book Contents */ = {isa = PBXBuildFile; fileRef = 5E086DCF2051DF0F004D8D25 /* Manifest.plist */; };
-		5E3196F32061DEA40077BBD7 /* LiveViewSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E3196F22061DEA40077BBD7 /* LiveViewSupport.swift */; };
 		5EA2E3C02056F35A00416A35 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EA2E3BF2056F35A00416A35 /* AppDelegate.swift */; };
 		5EA2E3CA2056F35B00416A35 /* LiveViewTestAppLaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EA2E3C82056F35B00416A35 /* LiveViewTestAppLaunchScreen.storyboard */; };
 		5EA2E3D42056F36800416A35 /* libBook_Sources.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF2F9AB2054BBF300191409 /* libBook_Sources.a */; };
@@ -17,10 +16,25 @@
 		5EA2E3DB2056F8D100416A35 /* PlaygroundSupport.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5EA2E3D72056F88700416A35 /* PlaygroundSupport.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5EBEC2F0205B399300975D3F /* LiveViewHost.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5EBEC2EF205B396500975D3F /* LiveViewHost.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5EF2F97C2054B6E400191409 /* ManifestPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5EF2F97E2054B6E400191409 /* ManifestPlist.strings */; };
-		5EF2F9AE2054BBF300191409 /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF2F9AD2054BBF300191409 /* LiveViewController.swift */; };
 		5EF2F9B72054E6FB00191409 /* Chapters in Copy Book Contents */ = {isa = PBXBuildFile; fileRef = 5EF2F9B62054E6F900191409 /* Chapters */; };
 		5EF2F9B82054E6FE00191409 /* Sources in Copy Book Contents */ = {isa = PBXBuildFile; fileRef = 5EF2F9A52054BBB200191409 /* Sources */; };
 		CB58E3D62242040F0058DBB7 /* PublicResources in Copy Book Contents */ = {isa = PBXBuildFile; fileRef = CB58E3D4224203960058DBB7 /* PublicResources */; };
+		CB58E3E622468A9D0058DBB7 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3E522468A9D0058DBB7 /* Direction.swift */; };
+		CB58E3EA224692640058DBB7 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3E9224692640058DBB7 /* Messenger.swift */; };
+		CB58E3EC22469CF10058DBB7 /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3EB22469CF10058DBB7 /* LiveViewController.swift */; };
+		CB58E3FB2246A1690058DBB7 /* AbstractDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3EF2246A1680058DBB7 /* AbstractDrawable.swift */; };
+		CB58E3FC2246A1690058DBB7 /* Rectangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3F02246A1680058DBB7 /* Rectangle.swift */; };
+		CB58E3FD2246A1690058DBB7 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3F12246A1680058DBB7 /* Point.swift */; };
+		CB58E3FE2246A1690058DBB7 /* AbstractShape.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3F22246A1680058DBB7 /* AbstractShape.swift */; };
+		CB58E3FF2246A1690058DBB7 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3F32246A1680058DBB7 /* Circle.swift */; };
+		CB58E4002246A1690058DBB7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3F42246A1690058DBB7 /* Color.swift */; };
+		CB58E4012246A1690058DBB7 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3F52246A1690058DBB7 /* Grid.swift */; };
+		CB58E4022246A1690058DBB7 /* Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3F62246A1690058DBB7 /* Shadow.swift */; };
+		CB58E4032246A1690058DBB7 /* Canvas.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3F72246A1690058DBB7 /* Canvas.swift */; };
+		CB58E4042246A1690058DBB7 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3F82246A1690058DBB7 /* Image.swift */; };
+		CB58E4052246A1690058DBB7 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3F92246A1690058DBB7 /* Size.swift */; };
+		CB58E4062246A1690058DBB7 /* TouchGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3FA2246A1690058DBB7 /* TouchGestureRecognizer.swift */; };
+		CB58E40A2246A4DA0058DBB7 /* LiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E4092246A4DA0058DBB7 /* LiveView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -100,7 +114,6 @@
 		5E0E37542065A065008FA4BE /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		5E1004BE208E7F6E00BCFE70 /* LICENSE.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE.txt; sourceTree = "<group>"; };
 		5E2A7AE6204F630600F4E17A /* BaseBuildSettings.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = BaseBuildSettings.xcconfig; sourceTree = "<group>"; };
-		5E3196F22061DEA40077BBD7 /* LiveViewSupport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewSupport.swift; sourceTree = "<group>"; };
 		5EA2E3BD2056F35A00416A35 /* LiveViewTestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LiveViewTestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EA2E3BF2056F35A00416A35 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EA2E3C92056F35B00416A35 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LiveViewTestAppLaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -111,10 +124,24 @@
 		5EF2F97D2054B6E400191409 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/ManifestPlist.strings; sourceTree = "<group>"; };
 		5EF2F9A52054BBB200191409 /* Sources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sources; sourceTree = "<group>"; };
 		5EF2F9AB2054BBF300191409 /* libBook_Sources.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBook_Sources.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		5EF2F9AD2054BBF300191409 /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		5EF2F9B62054E6F900191409 /* Chapters */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Chapters; sourceTree = "<group>"; };
 		CB58E3D4224203960058DBB7 /* PublicResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PublicResources; sourceTree = "<group>"; };
-		CB58E3D822427CCB0058DBB7 /* PlaygroundAPI */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PlaygroundAPI; sourceTree = "<group>"; };
+		CB58E3E522468A9D0058DBB7 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
+		CB58E3E9224692640058DBB7 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
+		CB58E3EB22469CF10058DBB7 /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
+		CB58E3EF2246A1680058DBB7 /* AbstractDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractDrawable.swift; sourceTree = "<group>"; };
+		CB58E3F02246A1680058DBB7 /* Rectangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rectangle.swift; sourceTree = "<group>"; };
+		CB58E3F12246A1680058DBB7 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		CB58E3F22246A1680058DBB7 /* AbstractShape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractShape.swift; sourceTree = "<group>"; };
+		CB58E3F32246A1680058DBB7 /* Circle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
+		CB58E3F42246A1690058DBB7 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		CB58E3F52246A1690058DBB7 /* Grid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		CB58E3F62246A1690058DBB7 /* Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shadow.swift; sourceTree = "<group>"; };
+		CB58E3F72246A1690058DBB7 /* Canvas.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Canvas.swift; sourceTree = "<group>"; };
+		CB58E3F82246A1690058DBB7 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		CB58E3F92246A1690058DBB7 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
+		CB58E3FA2246A1690058DBB7 /* TouchGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TouchGestureRecognizer.swift; sourceTree = "<group>"; };
+		CB58E4092246A4DA0058DBB7 /* LiveView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,9 +282,22 @@
 		5EF2F9A22054BB3E00191409 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				CB58E3D822427CCB0058DBB7 /* PlaygroundAPI */,
-				5EF2F9AD2054BBF300191409 /* LiveViewController.swift */,
-				5E3196F22061DEA40077BBD7 /* LiveViewSupport.swift */,
+				CB58E3EF2246A1680058DBB7 /* AbstractDrawable.swift */,
+				CB58E3F22246A1680058DBB7 /* AbstractShape.swift */,
+				CB58E3F72246A1690058DBB7 /* Canvas.swift */,
+				CB58E3F32246A1680058DBB7 /* Circle.swift */,
+				CB58E3F42246A1690058DBB7 /* Color.swift */,
+				CB58E3F52246A1690058DBB7 /* Grid.swift */,
+				CB58E3F82246A1690058DBB7 /* Image.swift */,
+				CB58E3F12246A1680058DBB7 /* Point.swift */,
+				CB58E3F02246A1680058DBB7 /* Rectangle.swift */,
+				CB58E3F62246A1690058DBB7 /* Shadow.swift */,
+				CB58E3F92246A1690058DBB7 /* Size.swift */,
+				CB58E3FA2246A1690058DBB7 /* TouchGestureRecognizer.swift */,
+				CB58E3E522468A9D0058DBB7 /* Direction.swift */,
+				CB58E4092246A4DA0058DBB7 /* LiveView.swift */,
+				CB58E3EB22469CF10058DBB7 /* LiveViewController.swift */,
+				CB58E3E9224692640058DBB7 /* Messenger.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -423,8 +463,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5E3196F32061DEA40077BBD7 /* LiveViewSupport.swift in Sources */,
-				5EF2F9AE2054BBF300191409 /* LiveViewController.swift in Sources */,
+				CB58E3FC2246A1690058DBB7 /* Rectangle.swift in Sources */,
+				CB58E3FF2246A1690058DBB7 /* Circle.swift in Sources */,
+				CB58E3FE2246A1690058DBB7 /* AbstractShape.swift in Sources */,
+				CB58E4012246A1690058DBB7 /* Grid.swift in Sources */,
+				CB58E4062246A1690058DBB7 /* TouchGestureRecognizer.swift in Sources */,
+				CB58E3E622468A9D0058DBB7 /* Direction.swift in Sources */,
+				CB58E3FD2246A1690058DBB7 /* Point.swift in Sources */,
+				CB58E4042246A1690058DBB7 /* Image.swift in Sources */,
+				CB58E3EC22469CF10058DBB7 /* LiveViewController.swift in Sources */,
+				CB58E4052246A1690058DBB7 /* Size.swift in Sources */,
+				CB58E3EA224692640058DBB7 /* Messenger.swift in Sources */,
+				CB58E40A2246A4DA0058DBB7 /* LiveView.swift in Sources */,
+				CB58E3FB2246A1690058DBB7 /* AbstractDrawable.swift in Sources */,
+				CB58E4022246A1690058DBB7 /* Shadow.swift in Sources */,
+				CB58E4002246A1690058DBB7 /* Color.swift in Sources */,
+				CB58E4032246A1690058DBB7 /* Canvas.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

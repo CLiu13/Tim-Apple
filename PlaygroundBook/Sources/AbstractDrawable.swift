@@ -279,6 +279,5 @@ public func ==(lhs: AbstractDrawable, rhs: AbstractDrawable) -> Bool {
 ///    - `changesToAnimate` The block of code to animate.
 /// - localizationKey: animate(duration:delay:_:)
 public func animate(duration: Double = 0.35, delay: Double = 0.0, _ changesToAnimate: @escaping () -> Void) {
-    UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [.beginFromCurrentState, .allowUserInteraction], animations: changesToAnimate, completion:nil)
+    UIView.animate(withDuration: duration, delay: delay, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [.beginFromCurrentState, .allowUserInteraction], animations: changesToAnimate, completion: nil)
 }
-
