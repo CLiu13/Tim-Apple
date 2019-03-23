@@ -84,6 +84,8 @@ func snapBlocks(blocks: [Rectangle], xBounds: [Double], startY: Double) {
             animate {
                 block.center = Point(x: getNearestXBound(xBounds: xBounds, currentX: block.center.x), y: startY + block.size.height / 2)
             }
+
+            updateBlocks(blocks: blocks, xBounds: xBounds, currentBlock: block)
         }
     }
 }
@@ -97,6 +99,26 @@ func shuffleBlocks(blocks: [Rectangle], xBounds: [Double]) -> [Rectangle] {
     }
 
     return blocks
+}
+
+// Given a set of blocks, x-bounds, and the current block, update block positions to prevent overlap
+func updateBlocks(blocks: [Rectangle], xBounds: [Double], currentBlock: Rectangle) {
+    var remainingXBound = xBounds
+
+    for block in blocks {
+        if let index = remainingXBound.index(of: (block.center.x * 100).rounded() / 100) {
+            remainingXBound.remove(at: index)
+        }
+    }
+
+    for block in blocks {
+        if ((block.center.x * 100).rounded() / 100 == (currentBlock.center.x * 100).rounded() / 100) && (block != currentBlock) {
+            animate {
+                block.center.x = remainingXBound[0]
+            }
+            break
+        }
+    }
 }
 
 var blocks = createBlocks(num: 5, minX: -30, maxX: 30, minY: -20, maxY: 40)
@@ -124,11 +146,17 @@ let animator = UIDynamicAnimator(referenceView: viewController.view)
 animator.setValue(true, forKey: "debugEnabled")
 
 // Create text button that, when tapped, will slightly push the apple to the left
-let pushAppleButton = Text(string: "Push Apple!", fontSize: 21.0)
+let pushAppleButton = Text(string: "Launch Apple!", fontSize: 21.0)
 pushAppleButton.color = .blue
 pushAppleButton.center.y = 10
 
 pushAppleButton.onTouchUp {
+    // Cannot drag blocks after button press
+    for block in blocks {
+        block.draggable = false
+    }
+
+    // Push the apple
     let push = UIPushBehavior(items: [apple.backingView], mode: .instantaneous)
     push.pushDirection = CGVector(dx: 0.5, dy: 0)
     animator.addBehavior(push)
