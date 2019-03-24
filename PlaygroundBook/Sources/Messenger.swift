@@ -12,6 +12,10 @@ public class Messenger {
         self.sendMessage(name: "PushApple")
     }
 
+    public func sendReset() {
+        self.sendMessage(name: "Reset")
+    }
+
     private func sendMessage(name: String) {
         let message: PlaygroundValue
         message = .dictionary(["Message": .string(name)])

@@ -19,7 +19,6 @@
 		5EF2F9B72054E6FB00191409 /* Chapters in Copy Book Contents */ = {isa = PBXBuildFile; fileRef = 5EF2F9B62054E6F900191409 /* Chapters */; };
 		5EF2F9B82054E6FE00191409 /* Sources in Copy Book Contents */ = {isa = PBXBuildFile; fileRef = 5EF2F9A52054BBB200191409 /* Sources */; };
 		CB58E3D62242040F0058DBB7 /* PublicResources in Copy Book Contents */ = {isa = PBXBuildFile; fileRef = CB58E3D4224203960058DBB7 /* PublicResources */; };
-		CB58E3E622468A9D0058DBB7 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3E522468A9D0058DBB7 /* Direction.swift */; };
 		CB58E3EA224692640058DBB7 /* Messenger.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3E9224692640058DBB7 /* Messenger.swift */; };
 		CB58E3EC22469CF10058DBB7 /* LiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3EB22469CF10058DBB7 /* LiveViewController.swift */; };
 		CB58E3FB2246A1690058DBB7 /* AbstractDrawable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3EF2246A1680058DBB7 /* AbstractDrawable.swift */; };
@@ -126,7 +125,6 @@
 		5EF2F9AB2054BBF300191409 /* libBook_Sources.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBook_Sources.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EF2F9B62054E6F900191409 /* Chapters */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Chapters; sourceTree = "<group>"; };
 		CB58E3D4224203960058DBB7 /* PublicResources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = PublicResources; sourceTree = "<group>"; };
-		CB58E3E522468A9D0058DBB7 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		CB58E3E9224692640058DBB7 /* Messenger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Messenger.swift; sourceTree = "<group>"; };
 		CB58E3EB22469CF10058DBB7 /* LiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveViewController.swift; sourceTree = "<group>"; };
 		CB58E3EF2246A1680058DBB7 /* AbstractDrawable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AbstractDrawable.swift; sourceTree = "<group>"; };
@@ -294,7 +292,6 @@
 				CB58E3F62246A1690058DBB7 /* Shadow.swift */,
 				CB58E3F92246A1690058DBB7 /* Size.swift */,
 				CB58E3FA2246A1690058DBB7 /* TouchGestureRecognizer.swift */,
-				CB58E3E522468A9D0058DBB7 /* Direction.swift */,
 				CB58E4092246A4DA0058DBB7 /* LiveView.swift */,
 				CB58E3EB22469CF10058DBB7 /* LiveViewController.swift */,
 				CB58E3E9224692640058DBB7 /* Messenger.swift */,
@@ -468,7 +465,6 @@
 				CB58E3FE2246A1690058DBB7 /* AbstractShape.swift in Sources */,
 				CB58E4012246A1690058DBB7 /* Grid.swift in Sources */,
 				CB58E4062246A1690058DBB7 /* TouchGestureRecognizer.swift in Sources */,
-				CB58E3E622468A9D0058DBB7 /* Direction.swift in Sources */,
 				CB58E3FD2246A1690058DBB7 /* Point.swift in Sources */,
 				CB58E4042246A1690058DBB7 /* Image.swift in Sources */,
 				CB58E3EC22469CF10058DBB7 /* LiveViewController.swift in Sources */,

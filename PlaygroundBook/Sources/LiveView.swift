@@ -8,37 +8,25 @@ public class LiveView: UIView {
     public var platforms: [Rectangle]?
     public var artificialGround: Rectangle?
 
+    public var numBlocks: Int?
+
     override public func didMoveToSuperview() {
-        self.addSubview(Canvas.shared.backingView)
-        self.backgroundColor = .white
-
-        self.blocks = createBlocks(num: 5, minX: -30, maxX: 30, minY: -20, maxY: 40)
-        self.platforms = createPlatforms(blocks: blocks!, minX: -30, maxX: 30, minY: -20, maxY: 40)
-        self.artificialGround = createArtificialGround()
-        let characters = createCharacters(platforms: platforms!)
-        let xBounds = createXBounds(blocks: blocks!)
-
-        self.tim = characters[0]
-        self.apple = characters[1]
-
-        snapBlocks(blocks: blocks!, xBounds: xBounds, startY: -27.5) // TODO: Need to replace hard-coded value with calculations
-        self.blocks = shuffleBlocks(blocks: blocks!, xBounds: xBounds)
+        createView()
     }
 
-    public func createBlocks(num: Int, minX: Double, maxX: Double, minY: Double, maxY: Double) -> [Rectangle] {
+    public func createBlocks(minX: Double, maxX: Double, minY: Double, maxY: Double) -> [Rectangle] {
         var blocks: [Rectangle] = []
         var block: Rectangle
 
-        let width = (0.5 * (maxX - minX) + 0.1 - Double(num) * 0.1) / Double(num)
-        let height = 0.75 * (maxY - minY) / (Double(num) * 0.1 + 1)
+        let width = (0.5 * (maxX - minX) + 0.1 - Double(numBlocks!) * 0.1) / Double(numBlocks!)
+        let height = 0.75 * (maxY - minY) / (Double(numBlocks!) * 0.1 + 1)
 
-        let startX = 0 - Double(num - 1) * (width + 0.1) / 2
+        let startX = 0 - Double(numBlocks! - 1) * (width + 0.1) / 2
         let startY = minY - height / 4
 
-        for i in 0...num - 1 {
+        for i in 0...numBlocks! - 1 {
             block = Rectangle(width: width, height: height - Double(i) * height / 10, cornerRadius: 0.5)
             block.center = Point(x: startX + Double(i) * (width + 0.1), y: startY + block.size.height / 2)
-
             block.draggable = true
 
             blocks.append(block)
@@ -49,11 +37,11 @@ public class LiveView: UIView {
 
     public func createPlatforms(blocks: [Rectangle], minX: Double, maxX: Double, minY: Double, maxY: Double) -> [Rectangle] {
         let width = (0.5 * (maxX - minX) - 2.2) / 2
-        let shortHeight = blocks[0].size.height
-        let tallHeight = blocks.last!.size.height
+        let tallHeight = blocks[0].size.height + 0.5
+        let shortHeight = blocks.last!.size.height
 
-        let platform1 = Rectangle(width: width, height: shortHeight, cornerRadius: 1)
-        let platform2 = Rectangle(width: width, height: tallHeight, cornerRadius: 1)
+        let platform1 = Rectangle(width: width, height: tallHeight, cornerRadius: 1)
+        let platform2 = Rectangle(width: width, height: shortHeight, cornerRadius: 1)
 
         platform1.center = Point(x: minX + 1 + width / 2, y: blocks[0].center.y)
         platform2.center = Point(x: maxX - 1 - width / 2, y: blocks.last!.center.y)
@@ -64,13 +52,12 @@ public class LiveView: UIView {
         return [platform1, platform2]
     }
 
-    // TODO: NEED TO CUSTOMIZE
-    public func createArtificialGround() -> Rectangle {
-        let fakeGround = Rectangle(width: 60, height: 8, cornerRadius: 0) // TODO: Need to replace hard-coded value with calculations
-        fakeGround.center = Point(x: 0, y: -31) // TODO: Need to replace hard-coded value with calculations
-        fakeGround.color = .white
+    public func createArtificialGround(platforms: [Rectangle]) -> Rectangle {
+        let artificialGround = Rectangle(width: 60.0, height: 8.0, cornerRadius: 0)
+        artificialGround.center = Point(x: 0, y: -31)
+        artificialGround.color = .clear
 
-        return fakeGround
+        return artificialGround
     }
 
     public func createCharacters(platforms: [Rectangle]) -> [Image] {
@@ -110,7 +97,9 @@ public class LiveView: UIView {
         return nearestXBound
     }
 
-    public func snapBlocks(blocks: [Rectangle], xBounds: [Double], startY: Double) {
+    public func snapBlocks(blocks: [Rectangle], xBounds: [Double], minY: Double, maxY: Double) {
+        let startY = minY - (0.75 * (maxY - minY) / (Double(numBlocks!) * 0.1 + 1)) / 4
+
         for block in blocks {
             block.onTouchDown {
                 block.dropShadow = Shadow()
@@ -143,24 +132,21 @@ public class LiveView: UIView {
         return blocks
     }
 
-    public func setBlocksDrag(blocks: [Rectangle], draggable: Bool) -> [Rectangle] {
-        for block in blocks {
-            block.draggable = draggable
-        }
-        return blocks
-    }
-
     public func updateBlocks(blocks: [Rectangle], xBounds: [Double], currentBlock: Rectangle) {
-        var remainingXBound = xBounds
+        var remainingXBound: [Double] = []
+
+        for xBound in xBounds {
+            remainingXBound.append((xBound * 1000).rounded() / 1000)
+        }
 
         for block in blocks {
-            if let index = remainingXBound.index(of: (block.center.x * 100).rounded() / 100) {
+            if let index = remainingXBound.index(of: (block.center.x * 1000).rounded() / 1000) {
                 remainingXBound.remove(at: index)
             }
         }
 
         for block in blocks {
-            if ((block.center.x * 100).rounded() / 100 == (currentBlock.center.x * 100).rounded() / 100) && (block != currentBlock) {
+            if ((block.center.x * 1000).rounded() / 1000 == (currentBlock.center.x * 1000).rounded() / 1000) && (block != currentBlock) {
                 let changesToAnimate = {
                     block.center.x = remainingXBound[0]
                 }
@@ -168,5 +154,22 @@ public class LiveView: UIView {
                 break
             }
         }
+    }
+
+    public func createView() {
+        self.addSubview(Canvas.shared.backingView)
+        self.backgroundColor = .white
+
+        self.blocks = createBlocks(minX: -30, maxX: 30, minY: -20, maxY: 40)
+        self.platforms = createPlatforms(blocks: blocks!, minX: -30, maxX: 30, minY: -20, maxY: 40)
+        self.artificialGround = createArtificialGround(platforms: platforms!)
+        let characters = createCharacters(platforms: platforms!)
+        let xBounds = createXBounds(blocks: blocks!)
+
+        self.tim = characters[0]
+        self.apple = characters[1]
+
+        snapBlocks(blocks: blocks!, xBounds: xBounds, minY: -20, maxY: 40)
+        self.blocks = shuffleBlocks(blocks: blocks!, xBounds: xBounds)
     }
 }

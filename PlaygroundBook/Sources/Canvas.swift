@@ -101,7 +101,7 @@ public class Canvas {
         drawables.remove(at: index)
     }
     
-    internal func clear() {
+    public func clear() {
         for drawable in drawables {
             drawable.backingView.removeFromSuperview()
         }

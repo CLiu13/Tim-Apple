@@ -4,8 +4,11 @@ import PlaygroundSupport
 public class LiveViewController: UIViewController, PlaygroundLiveViewMessageHandler, PlaygroundLiveViewSafeAreaContainer {
     private var animator: UIDynamicAnimator?
 
+    public var numBlocks: Int?
+
     public override func viewDidLoad() {
         let view = LiveView()
+        view.numBlocks = numBlocks!
         self.view = view
         self.animator = UIDynamicAnimator(referenceView: self.view)
     }
@@ -20,9 +23,18 @@ public class LiveViewController: UIViewController, PlaygroundLiveViewMessageHand
 
         switch message {
         case "PushApple":
-            self.pushApple(apple: ((self.view as! LiveView).apple?.backingView)!, strength: 0.75)
+            self.pushApple(apple: ((self.view as! LiveView).apple?.backingView)!, strength: 0.7)
+        case "Reset":
+            Canvas.shared.clear()
+            (self.view as! LiveView).createView()
         default:
             return
+        }
+    }
+
+    public func setBlocksDrag(blocks: [Rectangle], draggable: Bool) {
+        for block in blocks {
+            block.draggable = draggable
         }
     }
 
@@ -38,13 +50,15 @@ public class LiveViewController: UIViewController, PlaygroundLiveViewMessageHand
 
         collision.action = {
             if ((self.view as! LiveView).apple!.backingView).frame.intersects(((self.view as! LiveView).tim!.backingView).frame) {
-                self.view.backgroundColor = .green
+                (self.view as! LiveView).backgroundColor = .green
                 self.send(.string("Success"))
             }
         }
     }
 
     public func pushApple(apple: UIDynamicItem, strength: Double) {
+        setBlocksDrag(blocks: (self.view as! LiveView).blocks!, draggable: false)
+
         var allObjects = [((self.view as! LiveView).apple?.backingView)!, ((self.view as! LiveView).tim?.backingView)!, ((self.view as! LiveView).artificialGround?.backingView)!]
         for block in (self.view as! LiveView).blocks! {
             allObjects.append(block.backingView)
