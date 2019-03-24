@@ -24,6 +24,14 @@ public class Messenger {
         self.sendMessage(name: "MoveTallestToFront", payload: index)
     }
 
+    public func sendGetCurrentBlock(index: Int) {
+        self.sendMessage(name: "GetCurrentBlock", payload: index)
+    }
+
+    public func sendMoveBlockUntilFit() {
+        self.sendMessage(name: "MoveBlockUntilFit")
+    }
+
     private func sendMessage(name: String) {
         let message: PlaygroundValue
         message = .dictionary(["Message": .string(name)])

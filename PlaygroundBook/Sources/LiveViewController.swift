@@ -5,13 +5,16 @@ public class LiveViewController: UIViewController, PlaygroundLiveViewMessageHand
     private var animator: UIDynamicAnimator?
 
     public var numBlocks: Int?
-    public var tallestBlock: Int?
     public var blocksDrag: Bool = true
+    public var oppositeView: Bool = false
+
+    public var tallestBlock: Int?
 
     public override func viewDidLoad() {
         let view = LiveView()
         view.numBlocks = numBlocks!
         view.blocksDrag = blocksDrag
+        view.oppositeView = oppositeView
         self.view = view
         self.animator = UIDynamicAnimator(referenceView: self.view)
     }
@@ -38,6 +41,12 @@ public class LiveViewController: UIViewController, PlaygroundLiveViewMessageHand
             if case let .integer(payload)? = dictionary["Payload"] {
                 (self.view as! LiveView).moveTallestToFront(index: payload)
             }
+        case "GetCurrentBlock":
+            if case let .integer(payload)? = dictionary["Payload"] {
+                (self.view as! LiveView).getCurrentBlock(index: payload)
+            }
+        case "MoveBlockUntilFit":
+            (self.view as! LiveView).moveBlockUntilFit()
         default:
             return
         }
@@ -61,8 +70,10 @@ public class LiveViewController: UIViewController, PlaygroundLiveViewMessageHand
 
         collision.action = {
             if ((self.view as! LiveView).apple!.backingView).frame.intersects(((self.view as! LiveView).tim!.backingView).frame) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                    self.animator!.removeAllBehaviors()
+                }
                 (self.view as! LiveView).backgroundColor = .green
-                self.animator!.removeAllBehaviors()
                 self.send(.string("Success"))
             }
         }
@@ -83,7 +94,11 @@ public class LiveViewController: UIViewController, PlaygroundLiveViewMessageHand
         self.addCollisions(objects: allObjects)
 
         let push = UIPushBehavior(items: [apple], mode: .instantaneous)
-        push.pushDirection = CGVector(dx: strength, dy: 0)
+        if oppositeView {
+            push.pushDirection = CGVector(dx: -strength, dy: 0)
+        } else {
+            push.pushDirection = CGVector(dx: strength, dy: 0)
+        }
         self.animator!.addBehavior(push)
     }
 }

@@ -3,7 +3,7 @@ import PlaygroundSupport
 
 class Listener: PlaygroundRemoteLiveViewProxyDelegate {
     func remoteLiveViewProxy(_ remoteLiveViewProxy: PlaygroundRemoteLiveViewProxy, received message: PlaygroundValue) {
-        PlaygroundPage.current.assessmentStatus = .pass(message: "Awesome work! Let's explore another way to do this. [Next](@next)")
+        PlaygroundPage.current.assessmentStatus = .pass(message: "Awesome work! Let's explore another sorting algorithm, but with a twist this time. [Next](@next)")
         PlaygroundPage.current.finishExecution()
     }
 

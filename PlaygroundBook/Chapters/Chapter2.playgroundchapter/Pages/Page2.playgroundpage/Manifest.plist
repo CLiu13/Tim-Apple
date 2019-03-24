@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Name</key>
-	<string>Sorting Algorithms: Insertion Sort</string>
+	<string>Sorting Algorithms: Inverted Insertion Sort</string>
 	<key>LiveViewEdgeToEdge</key>
 	<true/>
 	<key>LiveViewMode</key>
