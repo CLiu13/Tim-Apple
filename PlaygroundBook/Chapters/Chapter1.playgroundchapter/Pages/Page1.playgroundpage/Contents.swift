@@ -1,8 +1,22 @@
 import UIKit
 import PlaygroundSupport
 
+class Listener: PlaygroundRemoteLiveViewProxyDelegate {
+    func remoteLiveViewProxy(_ remoteLiveViewProxy: PlaygroundRemoteLiveViewProxy, received message: PlaygroundValue) {
+        PlaygroundPage.current.assessmentStatus = .pass(message: "Nicely done! Let's move on. [Next](@next)")
+        PlaygroundPage.current.finishExecution()
+    }
+    func remoteLiveViewProxyConnectionClosed(_ remoteLiveViewProxy: PlaygroundRemoteLiveViewProxy) {
+    }
+}
+
+let listener = Listener()
+if let proxy = PlaygroundPage.current.liveView as? PlaygroundRemoteLiveViewProxy {
+    proxy.delegate = listener
+}
+
 let messenger = Messenger()
-let solution = "`pushApple(direction: \"right\")`"
+let solution = "`pushApple(\"right\")`"
 
 func pushApple(direction: String) {
     if (direction == "up") {

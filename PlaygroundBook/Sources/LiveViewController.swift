@@ -20,14 +20,14 @@ public class LiveViewController: UIViewController, PlaygroundLiveViewMessageHand
 
         switch message {
         case "PushApple":
-            self.pushApple(apple: ((self.view as! LiveView).apple?.backingView)!, strength: 1)
+            self.pushApple(apple: ((self.view as! LiveView).apple?.backingView)!, strength: 0.75)
         default:
             return
         }
     }
 
-    public func addGravity(_ object: UIDynamicItem) {
-        let gravity = UIGravityBehavior(items: [object])
+    public func addGravity(_ objects: [UIDynamicItem]) {
+        let gravity = UIGravityBehavior(items: objects)
         self.animator!.addBehavior(gravity)
     }
 
@@ -39,15 +39,21 @@ public class LiveViewController: UIViewController, PlaygroundLiveViewMessageHand
         collision.action = {
             if ((self.view as! LiveView).apple!.backingView).frame.intersects(((self.view as! LiveView).tim!.backingView).frame) {
                 self.view.backgroundColor = .green
-                PlaygroundPage.current.assessmentStatus = .pass(message: "Nicely done! Let's move on. [Next](@next)")
+                self.send(.string("Success"))
             }
         }
     }
 
     public func pushApple(apple: UIDynamicItem, strength: Double) {
-        let allObjects = [((self.view as! LiveView).apple?.backingView)!, ((self.view as! LiveView).tim?.backingView)!, ((self.view as! LiveView).blocks![0].backingView), ((self.view as! LiveView).blocks![1].backingView), ((self.view as! LiveView).blocks![2].backingView), ((self.view as! LiveView).blocks![3].backingView), ((self.view as! LiveView).blocks![4].backingView), ((self.view as! LiveView).platforms![0].backingView), ((self.view as! LiveView).platforms![1].backingView), ((self.view as! LiveView).artificialGround?.backingView)!]
+        var allObjects = [((self.view as! LiveView).apple?.backingView)!, ((self.view as! LiveView).tim?.backingView)!, ((self.view as! LiveView).artificialGround?.backingView)!]
+        for block in (self.view as! LiveView).blocks! {
+            allObjects.append(block.backingView)
+        }
+        for platform in (self.view as! LiveView).platforms! {
+            allObjects.append(platform.backingView)
+        }
 
-        self.addGravity(((self.view as! LiveView).apple?.backingView)!)
+        self.addGravity([((self.view as! LiveView).apple?.backingView)!, ((self.view as! LiveView).tim?.backingView)!])
         self.addCollisions(objects: allObjects)
 
         let push = UIPushBehavior(items: [apple], mode: .instantaneous)
