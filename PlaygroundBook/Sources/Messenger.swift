@@ -16,9 +16,23 @@ public class Messenger {
         self.sendMessage(name: "Reset")
     }
 
+    public func sendGetTallestBlock(index: Int) {
+        self.sendMessage(name: "GetTallestBlock", payload: index)
+    }
+
+    public func sendMoveTallestToFront(index: Int) {
+        self.sendMessage(name: "MoveTallestToFront", payload: index)
+    }
+
     private func sendMessage(name: String) {
         let message: PlaygroundValue
         message = .dictionary(["Message": .string(name)])
+        self.proxy.send(message)
+    }
+
+    private func sendMessage(name: String, payload: Int) {
+        let message: PlaygroundValue
+        message = .dictionary(["Message": .string(name), "Payload": .integer(payload)])
         self.proxy.send(message)
     }
 }

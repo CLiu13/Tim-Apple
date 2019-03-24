@@ -5,10 +5,13 @@ public class LiveViewController: UIViewController, PlaygroundLiveViewMessageHand
     private var animator: UIDynamicAnimator?
 
     public var numBlocks: Int?
+    public var tallestBlock: Int?
+    public var blocksDrag: Bool = true
 
     public override func viewDidLoad() {
         let view = LiveView()
         view.numBlocks = numBlocks!
+        view.blocksDrag = blocksDrag
         self.view = view
         self.animator = UIDynamicAnimator(referenceView: self.view)
     }
@@ -27,6 +30,14 @@ public class LiveViewController: UIViewController, PlaygroundLiveViewMessageHand
         case "Reset":
             Canvas.shared.clear()
             (self.view as! LiveView).createView()
+        case "GetTallestBlock":
+            if case let .integer(payload)? = dictionary["Payload"] {
+                (self.view as! LiveView).getTallestBlock(index: payload)
+            }
+        case "MoveTallestToFront":
+            if case let .integer(payload)? = dictionary["Payload"] {
+                (self.view as! LiveView).moveTallestToFront(index: payload)
+            }
         default:
             return
         }

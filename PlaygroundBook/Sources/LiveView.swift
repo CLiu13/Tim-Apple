@@ -6,9 +6,12 @@ public class LiveView: UIView {
     public var tim: Image?
     public var blocks: [Rectangle]?
     public var platforms: [Rectangle]?
+    public var xBounds: [Double]?
     public var artificialGround: Rectangle?
 
     public var numBlocks: Int?
+    public var tallestBlock: Int?
+    public var blocksDrag: Bool = true
 
     override public func didMoveToSuperview() {
         createView()
@@ -27,7 +30,7 @@ public class LiveView: UIView {
         for i in 0...numBlocks! - 1 {
             block = Rectangle(width: width, height: height - Double(i) * height / 10, cornerRadius: 0.5)
             block.center = Point(x: startX + Double(i) * (width + 0.1), y: startY + block.size.height / 2)
-            block.draggable = true
+            block.draggable = blocksDrag
 
             blocks.append(block)
         }
@@ -113,7 +116,7 @@ public class LiveView: UIView {
                 }
                 UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [.beginFromCurrentState, .allowUserInteraction], animations: changesToAnimate, completion: nil)
 
-                self.updateBlocks(blocks: blocks, xBounds: xBounds, currentBlock: block)
+                self.updateBlocks(blocks: blocks, xBounds: xBounds, currentBlocks: [block])
             }
         }
     }
@@ -132,9 +135,8 @@ public class LiveView: UIView {
         return blocks
     }
 
-    public func updateBlocks(blocks: [Rectangle], xBounds: [Double], currentBlock: Rectangle) {
+    public func updateBlocks(blocks: [Rectangle], xBounds: [Double], currentBlocks: [Rectangle]) {
         var remainingXBound: [Double] = []
-
         for xBound in xBounds {
             remainingXBound.append((xBound * 1000).rounded() / 1000)
         }
@@ -145,8 +147,13 @@ public class LiveView: UIView {
             }
         }
 
+        var currentXs: [Double] = []
+        for currentBlock in currentBlocks {
+            currentXs.append((currentBlock.center.x * 1000).rounded() / 1000)
+        }
+
         for block in blocks {
-            if ((block.center.x * 1000).rounded() / 1000 == (currentBlock.center.x * 1000).rounded() / 1000) && (block != currentBlock) {
+            if currentXs.contains((block.center.x * 1000).rounded() / 1000) && !(currentBlocks.contains(block)) {
                 let changesToAnimate = {
                     block.center.x = remainingXBound[0]
                 }
@@ -163,13 +170,46 @@ public class LiveView: UIView {
         self.blocks = createBlocks(minX: -30, maxX: 30, minY: -20, maxY: 40)
         self.platforms = createPlatforms(blocks: blocks!, minX: -30, maxX: 30, minY: -20, maxY: 40)
         self.artificialGround = createArtificialGround(platforms: platforms!)
+        self.xBounds = createXBounds(blocks: blocks!)
         let characters = createCharacters(platforms: platforms!)
-        let xBounds = createXBounds(blocks: blocks!)
 
         self.tim = characters[0]
         self.apple = characters[1]
 
-        snapBlocks(blocks: blocks!, xBounds: xBounds, minY: -20, maxY: 40)
-        self.blocks = shuffleBlocks(blocks: blocks!, xBounds: xBounds)
+        snapBlocks(blocks: blocks!, xBounds: xBounds!, minY: -20, maxY: 40)
+        self.blocks = shuffleBlocks(blocks: blocks!, xBounds: xBounds!)
+    }
+
+    public func updateBlocksByArrayPosition(index: Int, tallestBlock: Int) {
+        let changesToAnimate = {
+            self.blocks![index].center.x = self.xBounds![index]
+            self.blocks![tallestBlock].center.x = self.xBounds![tallestBlock]
+        }
+        UIView.animate(withDuration: 0.35, delay: 0, usingSpringWithDamping: 0.5, initialSpringVelocity: 0.5, options: [.beginFromCurrentState, .allowUserInteraction], animations: changesToAnimate, completion: nil)
+
+        updateBlocks(blocks: blocks!, xBounds: xBounds!, currentBlocks: [self.blocks![index], self.blocks![tallestBlock]])
+    }
+
+    public func getTallestBlock(index: Int) {
+        let blocks = self.blocks!
+
+        var max = index
+
+        for i in (index + 1) ... blocks.count - 1 {
+            if blocks[i].size.height > blocks[max].size.height {
+                max = i
+            }
+        }
+
+        blocks[max].color = .yellow
+        self.tallestBlock = max
+    }
+
+    public func moveTallestToFront(index: Int) {
+        if index != self.tallestBlock! {
+            blocks!.swapAt(index, tallestBlock!)
+        }
+
+        updateBlocksByArrayPosition(index: index, tallestBlock: tallestBlock!)
     }
 }

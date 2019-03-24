@@ -6,6 +6,7 @@ class Listener: PlaygroundRemoteLiveViewProxyDelegate {
         PlaygroundPage.current.assessmentStatus = .pass(message: "Nicely done! Now, what if there were more blocks? [Next](@next)")
         PlaygroundPage.current.finishExecution()
     }
+
     func remoteLiveViewProxyConnectionClosed(_ remoteLiveViewProxy: PlaygroundRemoteLiveViewProxy) {
     }
 }
