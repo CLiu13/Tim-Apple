@@ -51,6 +51,7 @@ public class LiveViewController: UIViewController, PlaygroundLiveViewMessageHand
         collision.action = {
             if ((self.view as! LiveView).apple!.backingView).frame.intersects(((self.view as! LiveView).tim!.backingView).frame) {
                 (self.view as! LiveView).backgroundColor = .green
+                self.animator!.removeAllBehaviors()
                 self.send(.string("Success"))
             }
         }

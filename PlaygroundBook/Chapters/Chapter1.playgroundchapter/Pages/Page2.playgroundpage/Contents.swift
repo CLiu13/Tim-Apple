@@ -18,6 +18,10 @@ if let proxy = PlaygroundPage.current.liveView as? PlaygroundRemoteLiveViewProxy
 let messenger = Messenger()
 let solution = "First, drag the blocks into descending order by height. Then, use `pushApple(\"right\")`."
 
+func reset() {
+    messenger.sendReset()
+}
+
 func pushApple(direction: String) {
     if (direction == "up") {
         PlaygroundPage.current.assessmentStatus = .fail(hints: ["Hmm, the apple can't defy gravity. Try again!"], solution: solution)
