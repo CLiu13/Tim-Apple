@@ -1,6 +1,7 @@
 //
 //  Shape.swift
-//  Shapes
+//  Shapes template by Apple
+//  Modified by Charlie Liu for WWDC19
 //
 
 import UIKit
