@@ -1,9 +1,10 @@
+//#-hidden-code
 import UIKit
 import PlaygroundSupport
 
 class Listener: PlaygroundRemoteLiveViewProxyDelegate {
     func remoteLiveViewProxy(_ remoteLiveViewProxy: PlaygroundRemoteLiveViewProxy, received message: PlaygroundValue) {
-        PlaygroundPage.current.assessmentStatus = .pass(message: "Awesome work! Let's explore another sorting algorithm, but with a twist this time. [Next](@next)")
+        PlaygroundPage.current.assessmentStatus = .pass(message: "Awesome work! Let's explore another sorting algorithm, but with a twist this time. [Move on!](@next)")
         PlaygroundPage.current.finishExecution()
     }
 
@@ -54,16 +55,23 @@ func pushApple(direction: String) {
         PlaygroundPage.current.finishExecution()
     }
 }
-
+//#-end-hidden-code
+//#-code-completion(everything, hide)
+//#-editable-code
 func selectionSort() {
-    let count = 10
+    let count = <#T##count##Int#>
+    for i in <#T##start##Int#>..<<#T##end##Int#> {
 
-    for i in 0..<(count - 1) {
-        getTallestBlock(index: i)
-        moveTallestToFront(index: i)
+
+        //#-hidden-code
         sleep(1)
+        //#-end-hidden-code
     }
 }
 
 selectionSort()
 pushApple(direction: <#T##direction##String#>)
+//#-end-editable-code
+/*:
+ Awesome work! Let's explore another sorting algorithm, but with a twist this time. [Move on!](@next)
+ */

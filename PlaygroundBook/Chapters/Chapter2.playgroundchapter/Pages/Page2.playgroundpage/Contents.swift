@@ -1,3 +1,4 @@
+//#-hidden-code
 import UIKit
 import PlaygroundSupport
 
@@ -55,15 +56,23 @@ func pushApple(direction: String) {
     }
 }
 
+//#-end-hidden-code
+//#-code-completion(everything, hide)
+//#-editable-code
 func insertionSort() {
-    let count = 10
+    let count = <#T##count##Int#>
+    for i in <#T##start##Int#>..<<#T##end##Int#> {
 
-    for i in 1..<count {
-        getCurrentBlock(index: i)
-        moveBlockUntilFit()
+
+        //#-hidden-code
         sleep(1)
+        //#-end-hidden-code
     }
 }
 
 insertionSort()
 pushApple(direction: <#T##direction##String#>)
+//#-end-editable-code
+/*:
+ Bravo! You are now a master of sorting!
+ */

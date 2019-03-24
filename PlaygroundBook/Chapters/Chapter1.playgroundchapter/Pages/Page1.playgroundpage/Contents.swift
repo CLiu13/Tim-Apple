@@ -1,9 +1,10 @@
+//#-hidden-code
 import UIKit
 import PlaygroundSupport
 
 class Listener: PlaygroundRemoteLiveViewProxyDelegate {
     func remoteLiveViewProxy(_ remoteLiveViewProxy: PlaygroundRemoteLiveViewProxy, received message: PlaygroundValue) {
-        PlaygroundPage.current.assessmentStatus = .pass(message: "Nicely done! Now, what if there were more blocks? [Next](@next)")
+        PlaygroundPage.current.assessmentStatus = .pass(message: "Nicely done! However, what if there were more blocks to sort? [Move on!](@next)")
         PlaygroundPage.current.finishExecution()
     }
 
@@ -46,5 +47,9 @@ func pushApple(direction: String) {
         PlaygroundPage.current.finishExecution()
     }
 }
-
-pushApple(direction: <#T##direction##String#>)
+//#-end-hidden-code
+//#-code-completion(everything, hide)
+pushApple(direction: /*#-editable-code*/<#T##direction##String#>/*#-end-editable-code*/)
+/*:
+ Nicely done! However, what if there were more blocks to sort? [Move on!](@next)
+ */
