@@ -98,7 +98,7 @@ public class LiveView: UIView {
         // FUTURE IMPROVEMENT: Calculate these values, rather than hard-coding
         let artificialGround = Rectangle(width: 60.0, height: 25.0, cornerRadius: 0)
         artificialGround.center = Point(x: 0, y: -40)
-        artificialGround.color = .red
+        artificialGround.color = .clear
 
         return artificialGround
     }
