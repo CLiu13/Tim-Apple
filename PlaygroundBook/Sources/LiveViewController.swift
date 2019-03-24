@@ -48,8 +48,7 @@ public class LiveViewController: UIViewController, PlaygroundLiveViewMessageHand
         case "PushApple":
             self.pushApple(apple: ((self.view as! LiveView).apple?.backingView)!, strength: 0.7)
         case "Reset":
-            Canvas.shared.clear()
-            (self.view as! LiveView).createView()
+            self.reset()
         case "GetTallestBlock":
             // If there is a payload, extract it
             if case let .integer(payload)? = dictionary["Payload"] {
@@ -141,5 +140,13 @@ public class LiveViewController: UIViewController, PlaygroundLiveViewMessageHand
             push.pushDirection = CGVector(dx: strength, dy: 0)
         }
         self.animator!.addBehavior(push)
+    }
+
+    /**
+     Method to completely reset the view
+     */
+    public func reset() {
+        Canvas.shared.clear()
+        (self.view as! LiveView).createView()
     }
 }

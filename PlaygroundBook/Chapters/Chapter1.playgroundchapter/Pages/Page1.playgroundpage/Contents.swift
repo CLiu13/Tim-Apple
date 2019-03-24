@@ -10,7 +10,7 @@
 
  Once you do that, type a direction into the `pushApple()` function below. You can choose between **"left"**, **"right"**, **"up"**, or **"down"** (don't forget the quotes, they are strings). Think carefully! Aftewards, hit the *Run My Code* button.
 
- If you get stuck, don't give up - try your best, and some helpful hints will guide you along the way!
+ If you get stuck, don't give up - try your best, and some helpful hints will guide you along the way! If you need it, a solution is available, and you can always reset the page when needed.
 
  Best of luck, and get going! Tim needs his apple back!
  

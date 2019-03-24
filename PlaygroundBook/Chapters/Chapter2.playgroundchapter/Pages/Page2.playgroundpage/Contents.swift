@@ -12,7 +12,7 @@
 
  Like before, our **insertion sort** algorithm is based on *raywenderlich*'s. In fact, this time, both of our algorithms are in ascending order. Keep that in mind as you work through the rest of this challenge.
 
- And of course, here are two methods that will help you tremendously with the sorting: `getCurrentBlock(index: Int)` and `moveBlockUntilFit()` (note the lack of a parameter).
+ And of course, here are two methods that will help you tremendously with the sorting: `getCurrentBlock(index: Int)` and `moveBlockUntilFit()` (note the lack of a parameter). There is also the `reset()` method, just in case.
 
  Good luck! Hints are provided as always, and feel free to take a peak at the solution if you want.
  */

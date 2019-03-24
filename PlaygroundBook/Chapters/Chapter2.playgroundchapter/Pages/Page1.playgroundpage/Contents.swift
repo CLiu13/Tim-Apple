@@ -12,7 +12,7 @@
 
  Start off by exmaning a **selection sort** algorithm written in Swift by GitHub user *raywenderlich*, which can be found [here](https://github.com/raywenderlich/swift-algorithm-club/tree/master/Selection%20Sort). There is an excellent, detailed explanation about the algorithm, and he provides you with the code for it.
 
- Our **selection sort** algorithm is based on *raywenderlich*'s, but his is in ascending order (smallest to greatest) while ours is in descending order (greatest to smallest). To help out, I have written two functions for you to use that take care of a large chunk of the sorting: `getTallestBlock(index: Int)` and `moveTallestToFront(index: Int)`.
+ Our **selection sort** algorithm is based on *raywenderlich*'s, but his is in ascending order (smallest to greatest) while ours is in descending order (greatest to smallest). To help out, I have written two functions for you to use that take care of a large chunk of the sorting: `getTallestBlock(index: Int)` and `moveTallestToFront(index: Int)`. There is also a `reset()` method, just in case.
 
  Good luck! Don't forget to determine the push direction at the end. And if you do get stuck, look out for those helpful hints. If you really need it, you can also check out the complete solution.
 
