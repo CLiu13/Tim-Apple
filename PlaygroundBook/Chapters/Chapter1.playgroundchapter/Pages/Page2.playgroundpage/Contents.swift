@@ -1,3 +1,14 @@
+/*:
+ ![Tim Apple 🍎](icon.png)
+
+ # Instructions
+ Nice job! That wasn't too hard, right?
+
+ Now, do the same thing again - sort the blocks by dragging them, and then determine the push direction - but this time, there are 10 blocks instead of 5.
+
+ As you will notice, this will take you a little longer to complete than last time. While you are doing so, think about this: *what if there were 100 blocks?*
+
+ */
 //#-hidden-code
 import UIKit
 import PlaygroundSupport
