@@ -12,10 +12,12 @@
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>DeploymentTarget</key>
 	<string>$(PLAYGROUND_BOOK_DEPLOYMENT_TARGET_FOR_MANIFEST)</string>
+	<key>ImageReference</key>
+	<string>icon.png</string>
 	<key>SwiftVersion</key>
 	<string>$(SWIFT_VERSION)</string>
 	<key>Name</key>
-	<string>PlaygroundBookName</string>
+	<string>Tim Apple</string>
 	<key>Chapters</key>
 	<array>
 		<string>Chapter1.playgroundchapter</string>

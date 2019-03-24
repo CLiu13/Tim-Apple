@@ -6,6 +6,7 @@
 	<string>Drag &amp; Drop</string>
 	<key>Pages</key>
 	<array>
+		<string>Introduction.cutscenepage</string>
 		<string>Page1.playgroundpage</string>
 		<string>Page2.playgroundpage</string>
 	</array>
