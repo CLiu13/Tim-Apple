@@ -1,4 +1,5 @@
 import UIKit
+import AVFoundation
 import PlaygroundSupport
 
 public class LiveView: UIView {
@@ -15,6 +16,8 @@ public class LiveView: UIView {
 
     public var tallestBlock: Int?
     public var currentBlock: Int?
+
+    public var player: AVAudioPlayer?
 
     override public func didMoveToSuperview() {
         createView()
@@ -186,6 +189,9 @@ public class LiveView: UIView {
 
         snapBlocks(blocks: blocks!, xBounds: xBounds!, minY: -20, maxY: 40)
         self.blocks = shuffleBlocks(blocks: blocks!, xBounds: xBounds!)
+
+        self.player = try! AVAudioPlayer(contentsOf: Bundle.main.url(forResource: "correctSoundEffect", withExtension: "wav")!)
+        player!.prepareToPlay()
     }
 
     public func updateBlocksByArrayPosition(index1: Int, index2: Int) {

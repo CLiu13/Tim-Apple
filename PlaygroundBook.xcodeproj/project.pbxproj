@@ -34,6 +34,7 @@
 		CB58E4052246A1690058DBB7 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3F92246A1690058DBB7 /* Size.swift */; };
 		CB58E4062246A1690058DBB7 /* TouchGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E3FA2246A1690058DBB7 /* TouchGestureRecognizer.swift */; };
 		CB58E40A2246A4DA0058DBB7 /* LiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB58E4092246A4DA0058DBB7 /* LiveView.swift */; };
+		CB82201722480C24004E2A8C /* PublicResources in Resources */ = {isa = PBXBuildFile; fileRef = CB58E3D4224203960058DBB7 /* PublicResources */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXBuildRule section */
@@ -413,6 +414,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CB82201722480C24004E2A8C /* PublicResources in Resources */,
 				5EF2F97C2054B6E400191409 /* ManifestPlist.strings in Resources */,
 				5E086DCA2051DDAE004D8D25 /* LiveView.storyboard in Resources */,
 			);
