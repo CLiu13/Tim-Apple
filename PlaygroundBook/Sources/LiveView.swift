@@ -8,7 +8,7 @@ import AVFoundation
 import PlaygroundSupport
 
 /**
- View class, where all objects are present
+ View class
  */
 public class LiveView: UIView {
     // Primary structures
@@ -35,7 +35,7 @@ public class LiveView: UIView {
     // For sounds
     public var player: AVAudioPlayer?
 
-    // Create view once loaded
+    // Create everything once loaded
     override public func didMoveToSuperview() {
         createView()
     }

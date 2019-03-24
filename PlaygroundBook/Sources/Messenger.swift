@@ -1,6 +1,14 @@
+//
+//  Messenger.swift
+//  Created by Charlie Liu for WWDC19
+//
+
 import Foundation
 import PlaygroundSupport
 
+/**
+ Messenger class to send messages between the live view and playground page
+ */
 public class Messenger {
     private var proxy: PlaygroundRemoteLiveViewProxy
 
